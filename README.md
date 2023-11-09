@@ -31,13 +31,13 @@ The default credentials are:
 
 ## Set Credentials
 
-Set credentials in "user:pass" format
+Set credentials in "user:password" format
 
 ```yaml
 steps:
 - uses: fawazahmed0/action-debug@main
   with:
-      credentials: "user:pass"
+      credentials: "user:password"
 ```
 
 

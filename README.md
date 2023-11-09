@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/fawazahmed0/action-debug/main/image2.png">
+  <img src="https://raw.githubusercontent.com/fawazahmed0/action-debug/main/screenshot.png">
 </p>
 
 # action-debug

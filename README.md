@@ -23,9 +23,11 @@ steps:
 ```
 
 The url to access the terminal will be printed in Github Actions log.
+
 The default credentials are:
-User: admin
-Password: admin
+| User:     | Password: |
+|-----------|-------|
+| admin | admin |
 
 ## Set Credentials
 

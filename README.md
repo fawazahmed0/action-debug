@@ -22,7 +22,7 @@ steps:
 - uses: fawazahmed0/action-debug@main
 ```
 
-The url to access the terminal will be printed in Github Actions log.
+The URL to access the terminal will be printed in Github Actions log.
 
 The default credentials are:
 | User:     | Password: |

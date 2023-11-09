@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/fawazahmed0/action-debug/main/image2.png">
+</p>
+
 # action-debug
 Debug your GitHub Actions by Accessing Terminal via Web Browser.
 Built using [ttyd](https://github.com/tsl0922/ttyd) and [Cloudflare tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/)

@@ -1,0 +1,48 @@
+name: 'Debugging with browser'
+description: 'Debug your GitHub Actions by Accessing Terminal via Web Browser'
+author: 'Fawaz Ahmed'
+
+# Define your inputs here.
+inputs:
+  credentials:
+    description: 'Set credentials in username:password format to access the terminal. Default value is admin:admin'
+    required: false
+    default: 'admin:admin'
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Install dependencies and run commands in windows
+      if: ${{ contains(runner.os, 'windows') }}
+      shell: bash
+      run: |
+        curl -f -L -o ../ttyd.exe https://github.com/tsl0922/ttyd/releases/download/1.7.3/ttyd.win32.exe
+        curl -f -L -o ../cloudflared.exe https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe
+        ../ttyd.exe -c ${{ inputs.credentials }} -p 8391 -a cmd &
+        ../cloudflared.exe tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
+
+    - name: Install dependencies and run commands in linux
+      if: ${{ contains(runner.os, 'linux') }}
+      shell: bash
+      run: |
+        echo $credentials
+        wget -O ../ttyd https://github.com/tsl0922/ttyd/releases/download/1.7.4/ttyd.x86_64
+        wget -O ../cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+        chmod 777 ../ttyd
+        chmod 777 ../cloudflared
+        ../ttyd -c ${{ inputs.credentials }} -p 8391 -a -W bash &
+        ../cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
+
+    - name: Install dependencies and run commands in macOS
+      if: ${{ contains(runner.os, 'macos') }}
+      shell: bash
+      run: |
+        brew install ttyd cloudflare/cloudflare/cloudflared
+        ttyd -c ${{ inputs.credentials }} -p 8391 -a -W bash &
+        cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
+
+    - name: wait for continue file to exist
+      shell: bash
+      run: |
+        while [ ! -f ./continue ]; do sleep 5; cat ../mylog.txt; echo $credentials; done

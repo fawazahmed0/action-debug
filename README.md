@@ -4,7 +4,7 @@ Built using [ttyd](https://github.com/tsl0922/ttyd) and [Cloudflare tunnel](http
 
 ## Features
 
-- Debug your GitHub Actions by using SSH or Web shell
+- Debug your GitHub Actions by Accessing Terminal via Web Browser
 - Continue your Workflows afterwards
 
 

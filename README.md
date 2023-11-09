@@ -47,4 +47,4 @@ If you want to continue a workflow, just create an empty file with the name `con
 
 ## Thanks to
 
-God 🙏 (Remember be thankful to God)
+God 🙏 (Remember, be thankful to God)

@@ -26,7 +26,6 @@ runs:
       if: ${{ contains(runner.os, 'linux') }}
       shell: bash
       run: |
-        echo $credentials
         wget -O ../ttyd https://github.com/tsl0922/ttyd/releases/download/1.7.4/ttyd.x86_64
         wget -O ../cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
         chmod 777 ../ttyd
@@ -45,4 +44,4 @@ runs:
     - name: wait for continue file to exist
       shell: bash
       run: |
-        while [ ! -f ./continue ]; do sleep 5; cat ../mylog.txt; echo $credentials; done
+        while [ ! -f ./continue ]; do sleep 5; cat ../mylog.txt; done

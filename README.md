@@ -3,12 +3,12 @@
 </p>
 
 # action-debug
-Debug your GitHub Actions by Accessing Terminal via Web Browser.
+Debug your GitHub Actions by Accessing Actions Terminal via Web Browser.
 Built using [ttyd](https://github.com/tsl0922/ttyd) and [Cloudflare tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/)
 
 ## Features
 
-- Debug your GitHub Actions by Accessing Terminal via Web Browser
+- Debug your GitHub Actions by Accessing Actions Terminal via Web Browser
 - Continue your Workflows afterwards
 
 

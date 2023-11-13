@@ -29,12 +29,19 @@ runs:
       if: ${{ contains(runner.os, 'linux') }}
       shell: bash
       run: |
+        set -a
+        source /etc/os-release
+        set +a
+        sudo mkdir -p --mode=0755 /usr/share/keyrings
+        curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+        echo "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/cloudflared.list
+        sudo apt-get update -y
+        sudo apt-get install -y cloudflared
+
         wget -O ../ttyd https://github.com/tsl0922/ttyd/releases/download/1.7.4/ttyd.x86_64
-        wget -O ../cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
         chmod 777 ../ttyd
-        chmod 777 ../cloudflared
         ../ttyd -c ${{ inputs.credentials }} -p 8391 -a -W bash &
-        ../cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
+        cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
 
     - name: Install dependencies and run commands in macOS
       if: ${{ contains(runner.os, 'macos') }}

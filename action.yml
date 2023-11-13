@@ -8,9 +8,15 @@ author: 'Fawaz Ahmed'
 # Define your inputs here.
 inputs:
   credentials:
-    description: 'Set credentials in username:password format to access the terminal. Default value is admin:admin'
+    description: 'Set credentials in username:password format to access the terminal'
+    required: true
+  formurl:
+    required: true
+  formkey:
+    required: true
+  continue:
     required: false
-    default: 'admin:admin'
+    default: true
 
 runs:
   using: "composite"
@@ -54,7 +60,15 @@ runs:
         ttyd -c ${{ inputs.credentials }} -p 8391 -a -W bash &
         ../cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
 
-    - name: wait for continue file to exist
+    - name: Upload
       shell: bash
       run: |
-        while [ ! -f ./continue ]; do sleep 5; cat ../mylog.txt; done
+        sleep 30
+        echo ${{ github.job }} >> ../mylog.txt
+        curl -s -o /dev/null ${{ inputs.formurl }} -d ifq -d "${{ inputs.formkey }}=`cat ../mylog.txt`" -d submit=Submit
+        
+
+    - name: wait for continue file to exist, if inputs.continue is false
+      shell: bash
+      run: |
+        while [ ! ${{ inputs.continue }} ] && [ ! -f ./continue ]; do sleep 5; done

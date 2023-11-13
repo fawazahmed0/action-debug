@@ -2,6 +2,7 @@ name: 'Debugging with browser'
 description: 'Debug your GitHub Actions by Accessing Terminal via Web Browser'
 branding:
   icon: terminal
+  color: 'black'
 author: 'Fawaz Ahmed'
 
 # Define your inputs here.

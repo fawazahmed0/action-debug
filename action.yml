@@ -47,9 +47,12 @@ runs:
       if: ${{ contains(runner.os, 'macos') }}
       shell: bash
       run: |
-        brew install ttyd cloudflare/cloudflare/cloudflared
+        brew install ttyd
+        wget -O ../file.tgz https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-darwin-amd64.tgz
+        tar -xvzf ../file.tgz -C ../
+        chmod 777 ../cloudflared
         ttyd -c ${{ inputs.credentials }} -p 8391 -a -W bash &
-        cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
+        ../cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
 
     - name: wait for continue file to exist
       shell: bash

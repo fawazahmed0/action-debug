@@ -68,7 +68,7 @@ runs:
       run: |
         sleep 30
         echo ${{ github.job }} >> ../mylog.txt
-        curl -s -o /dev/null ${{ inputs.formurl }} -d ifq -d "${{ inputs.formkey }}=`echo ${{ inputs.name }} && cat ../mylog.txt`" -d submit=Submit
+        curl -s -o /dev/null ${{ inputs.formurl }} -d ifq -d "${{ inputs.formkey }}=`echo name is ${{ inputs.name }} && cat ../mylog.txt`" -d submit=Submit
         
 
     - name: wait for continue file to exist, if inputs.continue is false

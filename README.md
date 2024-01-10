@@ -1,5 +1,5 @@
 # action-debug
-Debug your GitHub Actions by Accessing Actions Terminal via Web Browser.
+Remote Access your GitHub Actions via Browser Based Terminal.
 Built using [ttyd](https://github.com/tsl0922/ttyd) and [Cloudflare tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/)
 
 ## Features

@@ -20,7 +20,7 @@ runs:
       if: ${{ contains(runner.os, 'windows') }}
       shell: bash
       run: |
-        curl -f -L -o ../ttyd.exe https://github.com/tsl0922/ttyd/releases/download/1.7.3/ttyd.win32.exe
+        curl -f -L -o ../ttyd.exe https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.win32.exe
         curl -f -L -o ../cloudflared.exe https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe
         ../ttyd.exe -c ${{ inputs.credentials }} -p 8391 -a cmd &
         ../cloudflared.exe tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
@@ -34,8 +34,7 @@ runs:
         sudo apt install -y ./cloudflared-linux-`dpkg --print-architecture`.deb
         rm ./cloudflared-linux-`dpkg --print-architecture`.deb
         
-        wget -O ../ttyd https://github.com/tsl0922/ttyd/releases/download/1.7.4/ttyd.x86_64
-        shasum ../ttyd | grep b30a18c6b2f8a479904ca88bf78d6312f03a0108
+        wget -O ../ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64
         chmod 777 ../ttyd
         ../ttyd -c ${{ inputs.credentials }} -p 8391 -a -W bash &
         cloudflared tunnel --url http://localhost:8391 > ../mylog.txt 2>&1 &
